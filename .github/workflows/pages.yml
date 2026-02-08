@@ -1,0 +1,61 @@
+name: Deploy Hexo Site to Pages
+
+on:
+  # 监听 main 分支的 push 事件（如果你是 master 分支，请改为 master）
+  push:
+    branches:
+      - main
+
+  # 允许在这个页面手动触发构建
+  workflow_dispatch:
+
+# 设置权限，允许 Actions 修改 GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 允许并发部署
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # 构建任务
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (检出代码)
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive # 如果你的主题是作为 submodule 添加的，这行很重要
+          fetch-depth: 0
+
+      - name: Setup Node (安装 Node.js)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # 建议使用 LTS 版本
+          cache: 'npm'
+
+      - name: Install Dependencies (安装依赖)
+        run: npm install
+
+      - name: Build Hexo (生成静态文件)
+        run: npx hexo generate
+
+      - name: Upload Pages artifact (上传构建产物)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public # Hexo 默认生成的静态文件目录是 public
+
+  # 部署任务
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages (部署到 Pages)
+        id: deployment
+        uses: actions/deploy-pages@v4
