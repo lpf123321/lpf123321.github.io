@@ -102,3 +102,17 @@ theme: fluid
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+
+math:
+  engine: katex
+  katex:
+    css: https://fastly.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css
+    js: https://fastly.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.js
+    config:
+      # KaTeX config
+      throwOnError: false
+      errorColor: "#cc0000"
+
+markdown:
+  plugins:
+    - "@traptitech/markdown-it-katex"

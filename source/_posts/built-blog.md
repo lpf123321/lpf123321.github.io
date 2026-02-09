@@ -6,7 +6,7 @@ tags:
   - Hexo
 categories:
   - 技术分享
-#index_img: /img/hexo-cover.jpg  # 这里记得换成你自己 source/img 里的图片路径
+index_img: img\E963B1F3E3326007C0831439E1ECC213.jpg  
 excerpt: 零基础小白也能拥有自己的网站？手把手教你使用 Hexo + GitHub Actions 搭建完全免费、自动部署的个人博客。
 ---
 不需要购买服务器，不需要备案，甚至不需要懂复杂的编程，只要你有一个 GitHub 账号，就能免费搭建一个高颜值的网站！
