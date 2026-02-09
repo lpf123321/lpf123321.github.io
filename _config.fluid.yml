@@ -37,18 +37,18 @@ force_https: false
 code:
   # 是否开启复制代码的按钮
   # Enable copy code button
-  copy_btn: true
+  copy_btn: false
 
   # 代码语言
   # Code language
   language:
-    enable: true
+    enable: false
     default: "TEXT"
 
   # 代码高亮
   # Code highlight
   highlight:
-    enable: true
+    enable: false
 
     # 代码块是否显示行号
     # If true, the code block display line numbers
@@ -172,8 +172,8 @@ color:
 
   # 主面板背景色
   # Color of main board
-  board_color: "#fff"
-  board_color_dark: "#252d38"
+  board_color: "##ffffff80"
+  board_color_dark: "#15172280"
 
   # 文章正文字体色
   # Color of post text
@@ -234,15 +234,27 @@ font:
 # 指定自定义 .js 文件路径，支持列表；路径是相对 source 目录，如 /js/custom.js 对应存放目录 source/js/custom.js
 # Specify the path of your custom js file, support list. The path is relative to the source directory, such as `/js/custom.js` corresponding to the directory `source/js/custom.js`
 custom_js:
-
+  - /js/Sidebar.js
+  - /js/ScrollAnimation.js
+  - /js/DynamicLine.js
+  - /js/TabDisplay.js
+  - /js/RainbowLoading.js
 # 指定自定义 .css 文件路径，用法和 custom_js 相同
 # The usage is the same as custom_js
 custom_css:
-
+  - /css/StrongInDark.css
+  - /css/TitleGradient.css
+  - /css/Sidebar.css
+  - /css/CodeInLine.css
+  - /css/ScrollAnimation.css
+  - /css/CodeBlock.css
+  - /css/FrostedGlass.css
+  - /css/UnifyImageWidth.css
+  - https://lib.baomitu.com/font-awesome/6.1.2/css/all.min.css
 # 网页访问统计
 # Analysis of website visitors
 web_analytics:
-  enable: false
+  enable: true
 
   # 遵循访客浏览器"请勿追踪"的设置，如果开启则不统计其访问
   # Follow the "Do Not Track" setting of the visitor's browser
@@ -448,13 +460,12 @@ footer:
   content: '
     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
     <i class="iconfont icon-love"></i>
-    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
-  '
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>'
 
   # 展示网站的 PV、UV 统计数
   # Display website PV and UV statistics
   statistics:
-    enable: false
+    enable: true
 
     # 统计数据来源，使用 leancloud, umami 需要设置 `web_analytics` 中对应的参数；使用 busuanzi 不需要额外设置，但是有时不稳定，另外本地运行时 busuanzi 显示统计数据很大属于正常现象，部署后会正常
     # Data source. If use leancloud, umami, you need to set the parameter in `web_analytics`
@@ -482,7 +493,7 @@ footer:
 index:
   # 首页 Banner 头图，可以是相对路径或绝对路径，以下相同
   # Path of Banner image, can be a relative path or an absolute path, the same on other pages
-  banner_img: /img/default.png
+  banner_img: \img\default.jpg
 
   # 头图高度，屏幕百分比
   # Height ratio of banner image
@@ -501,7 +512,7 @@ index:
 
     # 为空则按 hexo config.subtitle 显示，支持列表格式来实现随机选择一行文字显示
     # If empty, text based on `subtitle` in hexo config, support list format to random selection of a row for display
-    text: "一个基于 Hexo 的个人博客"
+    text: "千里之行，始于足下。"
 
     # 通过 API 接口作为首页副标题的内容，必须返回的是 JSON 格式，如果请求失败则按 text 字段显示，该功能必须先开启 typing 打字机功能
     # Subtitle of the homepage through the API, must be returned a JSON. If the request fails, it will be displayed in `text` value. This feature must first enable the typing animation
@@ -725,7 +736,7 @@ post:
 
     # 开启后，只有在文章 Front-matter 里指定 `math: true` 才会在文章页启动公式转换，以便在页面不包含公式时提高加载速度
     # If true, only set `math: true` in Front-matter will enable math, to load faster when the page does not contain math
-    specific: true
+    specific: false
 
     # Options: mathjax | katex
     engine: katex
@@ -1111,7 +1122,7 @@ static_prefix:
 
   katex: https://lib.baomitu.com/KaTeX/0.16.2/
 
-  busuanzi: https://busuanzi.ibruce.info/busuanzi/2.3/
+  busuanzi: https://events.vercount.one/js?i=
 
   clipboard: https://lib.baomitu.com/clipboard.js/2.0.11/
 
@@ -1132,7 +1143,3 @@ static_prefix:
   hint: https://lib.baomitu.com/hint.css/2.7.0/
 
   moment: https://lib.baomitu.com/moment.js/2.29.4/
-
-markdown:
-  plugins:
-    - "@traptitech/markdown-it-katex"

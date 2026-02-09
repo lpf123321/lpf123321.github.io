@@ -43,17 +43,23 @@ render_drafts: false
 post_asset_folder: false
 relative_link: false
 future: true
-syntax_highlighter: highlight.js
+syntax_highlighter: 
 highlight:
-  line_number: true
-  auto_detect: false
-  tab_replace: ''
-  wrap: true
-  hljs: false
+  enable: false
 prismjs:
-  preprocess: true
-  line_number: true
-  tab_replace: ''
+  enable: false
+shiki:
+  theme: one-dark-pro # highlight-theme：one-dark-pro / github-light / github-dark / material-theme-palenight
+  line_number: true # whether to show the line_number
+  beautify: true # whether to add highlight tool true or false
+  highlight_copy: true # copy button
+  highlight_lang: true # show the code language
+  highlight_height_limit: 360 # code-block max height,unit: px
+  is_highlight_shrink: false # true: shrink the code blocks / false: expand the code blocks | none: expand code blocks and hide the button
+  copy: # copy message
+    success: 'Copy Success'
+    error: 'Copy Error'
+    no_support: 'Browser Not Support'
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -103,15 +109,16 @@ theme: fluid
 deploy:
   type: ''
 
-math:
-  engine: katex
-  katex:
-    css: https://fastly.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css
-    js: https://fastly.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.js
-    config:
-      # KaTeX config
-      throwOnError: false
-      errorColor: "#cc0000"
+# math:
+#   engine: katex
+#   katex:
+#     auto_render: false
+#     css: https://fastly.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css
+#     js: https://fastly.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.js
+#     config:
+#       # KaTeX config
+#       throwOnError: false
+#       errorColor: "#cc0000"
 
 markdown:
   plugins:

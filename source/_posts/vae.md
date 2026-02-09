@@ -12,14 +12,14 @@ excerpt: 变分自编码器（VAE）是大部分视觉 tokenizer 的基础。通
 ## 1. 架构介绍
 变分自编码器（Variational Autoencoder, **VAE**）是含有隐变量（latent variable）的概率模型，由编码器和解码器组成，编码器和解码器都是神经网络。设输入样本为$d$维向量 $\bm{x}$，隐变量为$k$维向量 $\bm z$。编码器表示条件概率分布 $q_{\bm\phi}(\bm{z|x})$，它把高维的数据压缩为低维的特征；解码器表示条件概率分布 $p_{\bm\theta}(\bm{x|z})$，它把特征还原为数据。在具体实现上，默认假设它们都是**多元正态分布**(最大熵原理，实际上也可以是其他的分布)，这样编码器和解码器只需输出均值向量和协方差矩阵。
 - 编码器表示概率分布 $\mathcal N(\bm\mu_e,\bm\Sigma_e)$，编码器输出均值向量 $\bm\mu_e$和 协方差矩阵 $\bm\Sigma_e=\text{diag}\{\sigma_{e1}^2,\sigma_{e2}^2,\dots,\sigma_{ek}^2\}$。
-- 解码器表示概率分布 $\mathcal N(\bm\mu_d,\sigma_d\bm I)$，解码器只输出均值向量 $$\bm\mu_d=\bm {\hat x}=f_{\bm\theta}(\bm z)$$（$\sigma_d$常常作为超参数）。在推理阶段，模型输出$\bm{\hat x}$即为均值$\bm\mu_d$。
+- 解码器表示概率分布 $\mathcal N(\bm\mu_d,\sigma_d\bm I)$，解码器只输出均值向量 $\bm\mu_d=\bm {\hat x}=f_{\bm\theta}(\bm z)$（$\sigma_d$常常作为超参数）。在推理阶段，模型输出 $\bm{\hat x}$ 即为均值 $\bm\mu_d$。
 
 这些都是人为设置的归纳偏置。对于解码器，我们假设只要给定了隐变量（抓住了核心特征），剩下的像素之间的噪声就是互不干扰的白噪声；对于编码器，我们希望隐变量的各个维度是解耦的，使得两个协方差矩阵都是对角的，也让在计算正态分布时求逆和行列式简单得多。重构时假设噪声是均匀的，因此解码器的协方差矩阵对角线上元素都相同。
 
 ## 2.概率模型
 由贝叶斯公式，
 $$
- \displaystyle p_{\bm\theta}(\bm{z|x})=\frac{p_{\bm\theta}(\bm z)p_{\bm\theta}(\bm{x|z})}{p_{\bm\theta}(\bm x)}=\frac{p_{\bm\theta}(\bm z)p_{\bm\theta}(\bm{x|z})}{\displaystyle\int p_{\bm\theta}(\bm z)p_{\bm\theta}(\bm {x|z}) d\bm z}
+ \displaystyle p_{\bm\theta}(\bm{z|x})=\frac{p_{\bm\theta}(\bm z)p_{\bm\theta}(\bm{x|z})}{p_{\bm\theta}(\bm x)}=\frac{p_{\bm\theta}(\bm z)p_{\bm\theta}(\bm{x|z})}{\displaystyle\int p_{\bm\theta}(\bm z)p_{\bm\theta}(\bm {x|z}) \mathrm d\bm z}
 $$
 
 其中，$p_{\bm\theta}(\bm{z|x})$ 称为**后验概率分布**，$p_{\bm\theta}(\bm z)$ 称为**先验概率分布**，$p_{\bm\theta}(\bm{x|z})$ 称为**似然函数**，$p_{\bm\theta}(\bm x)$ 称为**证据**。解码器的分布就是似然函数 $p_{\bm\theta}(\bm{x|z})$。对于后验概率分布，往往难以求解，因此我们用另一个较好求解的分布（变分分布）代替后验概率分布，并最小化它们之间的差别（用 KL 散度描述）。编码器的分布 $q_{\bm\phi}(\bm{z|x})$ 就是这样的变分分布，用于近似后验概率分布 $p_{\bm\theta}(\bm{z|x})$。
@@ -32,7 +32,7 @@ VAE 的学习目标是从训练集 $\mathcal{D}=\{\bm x\}$ 中学习似然函数
 对数似然函数为
 
 $$
-\displaystyle\sum_{\bm x\in\mathcal{D}}\log p_{\bm\theta}(\bm x)=\sum_{\bm x\in\mathcal{D}}\log \int p_{\bm\theta}(\bm z)p_{\bm\theta}(\bm {x|z}) d\bm z
+\displaystyle\sum_{\bm x\in\mathcal{D}}\log p_{\bm\theta}(\bm x)=\sum_{\bm x\in\mathcal{D}}\log \int p_{\bm\theta}(\bm z)p_{\bm\theta}(\bm {x|z})\mathrm d\bm z
 $$
 
 对于每个样本，

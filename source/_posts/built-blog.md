@@ -7,7 +7,7 @@ tags:
 categories:
   - 技术分享
 index_img: img\E963B1F3E3326007C0831439E1ECC213.jpg  
-excerpt: 零基础小白也能拥有自己的网站？手把手教你使用 Hexo + GitHub Actions 搭建完全免费、自动部署的个人博客。
+excerpt: 个人博客搭建教程，基于 GitHub Pages 和 Hexo ，完全免费、自动部署。
 ---
 不需要购买服务器，不需要备案，甚至不需要懂复杂的编程，只要你有一个 GitHub 账号，就能免费搭建一个高颜值的网站！
 
@@ -181,7 +181,7 @@ hexo new "文章标题"
 写完后，**一定**要在本地先看看效果，避免排版错误直接发到网上。
 
 在终端执行：
-```powershell
+```bash
 hexo clean   # 清除缓存（防止旧样式残留）
 hexo s       # 启动本地服务器
 ```
@@ -217,7 +217,7 @@ hexo new "文章标题"
 如果你有一篇文章写了一半不想发，但又想把其他改动推送到 GitHub 备份，可以使用草稿功能：
 
 1.  **新建草稿**：
-    ```powershell
+    ```bash
     hexo new draft "未完成的草稿"
     ```
     *   文件会生成在 `source/_drafts/` 目录下。
@@ -225,13 +225,13 @@ hexo new "文章标题"
 
 2.  **本地预览草稿**：
     如果你想在本地预览草稿，命令要加参数：
-    ```powershell
+    ```bash
     hexo s --draft
     ```
 
 3.  **正式发布草稿**：
     写完后，执行以下命令，它会把文件从 `_drafts` 移到 `_posts`：
-    ```powershell
+    ```bash
     hexo publish "未完成的草稿"
     ```
     然后推送到 GitHub 即可。
