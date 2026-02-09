@@ -6,7 +6,7 @@ tags:
   - 深度学习
 categories:
   - 技术分享
-index_img: img\DDABAA55C1994888D8CA7985EF8E6F32.jpg 
+index_img: img/DDABAA55C1994888D8CA7985EF8E6F32.jpg 
 excerpt: 变分自编码器（VAE）是大部分视觉 tokenizer 的基础。通过将高维像素空间映射到低维潜空间，VAE 实现了信息压缩和特征提取，便于模型后续的处理。
 ---
 ## 1. 架构介绍

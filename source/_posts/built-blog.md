@@ -6,7 +6,7 @@ tags:
   - Hexo
 categories:
   - 技术分享
-index_img: img\E963B1F3E3326007C0831439E1ECC213.jpg  
+index_img: img/E963B1F3E3326007C0831439E1ECC213.jpg  
 excerpt: 个人博客搭建教程，基于 GitHub Pages 和 Hexo ，完全免费、自动部署。
 ---
 不需要购买服务器，不需要备案，甚至不需要懂复杂的编程，只要你有一个 GitHub 账号，就能免费搭建一个高颜值的网站！
